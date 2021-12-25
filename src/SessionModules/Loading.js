@@ -52,18 +52,18 @@ export default function Loading() {
     },
   ]);
   const dataList = () =>
-    data.map(temp => {
+    data.map((temp, i) => {
       return (
-        <View>
+        <View key={i++}>
           <View style={styles.date}></View>
           {sessionsList(temp.sessions)}
         </View>
       );
     });
   const sessionsList = sessions =>
-    sessions.map(session => {
+    sessions.map((session, i) => {
       return (
-        <View style={styles.session}>
+        <View key={i++} style={styles.session}>
           <View style={styles.sessionImage}></View>
           <View style={styles.sessionContent}>
             <View
