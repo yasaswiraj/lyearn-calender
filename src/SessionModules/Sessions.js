@@ -7,17 +7,26 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import SeatsFilter from './SeatsFilter';
+import DateFilter from './DateFilter';
 
 export default function Sessions() {
+  const [SeatsFilterVisible, setSeatsFilterVisible] = useState(true);
+  const [DateFilterVisible, setDateFilterVisible] = useState(false);
+  const [InstructorFilterVisible, setInstructorFilterVisible] = useState(false);
   const [data] = useState([
     {
-      date: '12th December, 2021.',
+      date: 'Fri, 12 December',
       sessions: [
         {
           title: '3 Dimensional Connections',
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '1.png',
+          finished: true,
+          registered: false,
+          capacity: 112,
+          seats: 22,
         },
         {
           title:
@@ -25,51 +34,135 @@ export default function Sessions() {
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '2.png',
+          finished: false,
+          registered: true,
+          capacity: 112,
+          seats: 22,
         },
         {
           title: 'Designing your life',
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '3.png',
+          finished: false,
+          registered: false,
+          capacity: 112,
+          seats: 22,
         },
       ],
     },
 
     {
-      date: '12th December, 2021.',
+      date: 'Sat, 27 December',
       sessions: [
         {
           title: 'The Accidental Design Leader',
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '4.png',
+          finished: false,
+          registered: false,
+          capacity: 112,
+          seats: 0,
         },
         {
           title: 'Sprinklr Gold Deck',
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '5.png',
+          finished: false,
+          registered: false,
+          capacity: 112,
+          seats: 3,
         },
       ],
     },
 
     {
-      date: '12th December, 2021.',
+      date: 'Tue, 30 December',
       sessions: [
         {
-          title: 'Hello',
+          title: 'The perfect holiday',
           timings: '8:30 AM - 12:00 PM IST',
           duration: '30 min',
           uri: '5.png',
+          finished: false,
+          registered: false,
+          capacity: 112,
+          seats: 9,
         },
       ],
     },
   ]);
+  const statusSection = session => {
+    if (session.finished)
+      return (
+        <View style={styles.sessionStatus}>
+          <Text style={{color: '#666666', fontWeight: 'bold', fontSize: 10}}>
+            FINISHED
+          </Text>
+        </View>
+      );
+    else if (session.registered)
+      return (
+        <View style={[styles.sessionStatus, {backgroundColor: '#444444'}]}>
+          <Text style={{color: '#ffffff', fontWeight: 'bold', fontSize: 10}}>
+            REGISTERED
+          </Text>
+        </View>
+      );
+    else {
+      if (session.seats === 0)
+        return (
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              style={{width: 20, height: 20, marginRight: 10}}
+              source={require('../../icons/seats-full.png')}
+            />
+            <Text style={{color: '#666666'}}>No Seats</Text>
+          </View>
+        );
+      else if (session.seats > 10)
+        return (
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              style={{width: 20, height: 20, marginRight: 10}}
+              source={require('../../icons/capacity.png')}
+            />
+            <Text style={{color: '#666666', marginRight: 20}}>
+              {session.capacity}
+            </Text>
+            <Image
+              style={{width: 20, height: 20, marginRight: 10}}
+              source={require('../../icons/seats.png')}
+            />
+            <Text style={{color: '#666666'}}>{session.seats} left</Text>
+          </View>
+        );
+      else
+        return (
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              style={{width: 20, height: 20, marginRight: 10}}
+              source={require('../../icons/capacity.png')}
+            />
+            <Text style={{color: '#666666', marginRight: 20}}>
+              {session.capacity}
+            </Text>
+            <Image
+              style={{width: 20, height: 20, marginRight: 10}}
+              source={require('../../icons/filling-fast.png')}
+            />
+            <Text style={{color: '#666666'}}>{session.seats} left</Text>
+          </View>
+        );
+    }
+  };
   const dataList = () =>
     data.map((temp, i) => {
       return (
         <View key={i++}>
-          <View style={styles.date}></View>
+          <Text style={styles.date}>{temp.date}</Text>
           {sessionsList(temp.sessions)}
         </View>
       );
@@ -85,21 +178,11 @@ export default function Sessions() {
           <View style={styles.sessionContent}>
             <Text style={styles.sessionTitle}>{session.title}</Text>
             <View style={styles.schedule}>
-              <View
-                style={[
-                  styles.sessionSchedule,
-                  {
-                    width: `${Math.random() * (90 - 20) + 20}%`,
-                    marginRight: 6,
-                  },
-                ]}></View>
-              <View
-                style={[
-                  styles.sessionSchedule,
-                  {width: `${Math.random() * (40 - 10) + 10}%`},
-                ]}></View>
+              <Text style={{color: '#666666'}}>
+                {session.timings} • {session.duration}
+              </Text>
             </View>
-            <View style={styles.sessionStatus}></View>
+            {statusSection(session)}
           </View>
         </View>
       );
@@ -107,13 +190,39 @@ export default function Sessions() {
   return (
     <View style={styles.container}>
       <View style={styles.filters}>
-        <TouchableOpacity style={styles.filter}>
+        <SeatsFilter
+          SeatsFilterVisible={SeatsFilterVisible}
+          setSeatsFilterVisible={setSeatsFilterVisible}
+        />
+        <DateFilter
+          DateFilterVisible={DateFilterVisible}
+          setDateFilterVisible={setDateFilterVisible}
+        />
+        <TouchableOpacity
+          style={
+            DateFilterVisible
+              ? [styles.filter, {borderColor: 'black', borderWidth: 1}]
+              : styles.filter
+          }
+          onPress={() => setDateFilterVisible(!DateFilterVisible)}>
           <Text style={{color: 'black', fontWeight: '400'}}>Date</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filter}>
+        <TouchableOpacity
+          style={
+            SeatsFilterVisible
+              ? [styles.filter, {borderColor: 'black', borderWidth: 1}]
+              : styles.filter
+          }
+          onPress={() => setSeatsFilterVisible(!SeatsFilterVisible)}>
           <Text style={{color: 'black', fontWeight: '400'}}>Seats</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filter}>
+        <TouchableOpacity
+          style={
+            InstructorFilterVisible
+              ? [styles.filter, {borderColor: 'black', borderWidth: 1}]
+              : styles.filter
+          }
+          onPress={() => setInstructorFilterVisible(!InstructorFilterVisible)}>
           <Text style={{color: 'black', fontWeight: '400'}}>Instructor</Text>
         </TouchableOpacity>
       </View>
@@ -145,11 +254,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   date: {
-    width: 160,
-    height: 18,
+    fontSize: 16,
     marginVertical: 20,
-    backgroundColor: '#e0e0e0',
-    borderRadius: 4,
+    fontWeight: '600',
+    color: 'black',
   },
   sessions: {
     marginVertical: 20,
@@ -172,10 +280,10 @@ const styles = StyleSheet.create({
   sessionTitle: {
     fontSize: 16,
     color: 'black',
-    marginBottom: 10,
+    marginBottom: 6,
   },
   schedule: {
-    flexDirection: 'row',
+    marginBottom: 12,
   },
   sessionSchedule: {
     height: 16,
@@ -185,8 +293,10 @@ const styles = StyleSheet.create({
   },
   sessionStatus: {
     backgroundColor: '#f2f2f2',
-    height: 26,
-    width: 120,
+    padding: 5,
+    maxWidth: 96,
     borderRadius: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
