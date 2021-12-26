@@ -113,7 +113,7 @@ export default function SeatsFilter({
               setSeatsFilterVisible(!SeatsFilterVisible);
             }}
             style={styles.button}>
-            <Text style={{fontWeight: 'bold', color: 'white'}}>SAVE</Text>
+            <Text style={{fontWeight: 'bold', color: 'white'}}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>

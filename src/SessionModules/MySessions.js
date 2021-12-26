@@ -10,91 +10,35 @@ import {
 import SeatsFilter from './SeatsFilter';
 import DateFilter from './DateFilter';
 
-export default function Sessions() {
+export default function MySessions() {
   const [SeatsFilterVisible, setSeatsFilterVisible] = useState(false);
   const [DateFilterVisible, setDateFilterVisible] = useState(false);
   const [InstructorFilterVisible, setInstructorFilterVisible] = useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date());
-  const [data] = useState([
-    {
-      date: 'Fri, 12 December',
-      sessions: [
-        {
-          title: '3 Dimensional Connections',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '1.png',
-          finished: true,
-          registered: false,
-          capacity: 112,
-          seats: 22,
-        },
-        {
-          title:
-            'The Next Billion and the Rise of Irrational Design by Payal Arora',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '2.png',
-          finished: false,
-          registered: true,
-          capacity: 112,
-          seats: 22,
-        },
-        {
-          title: 'Designing your life',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '3.png',
-          finished: false,
-          registered: false,
-          capacity: 112,
-          seats: 22,
-        },
-      ],
-    },
-
-    {
-      date: 'Sat, 27 December',
-      sessions: [
-        {
-          title: 'The Accidental Design Leader',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '4.png',
-          finished: false,
-          registered: false,
-          capacity: 112,
-          seats: 0,
-        },
-        {
-          title: 'Sprinklr Gold Deck',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '5.png',
-          finished: false,
-          registered: false,
-          capacity: 112,
-          seats: 3,
-        },
-      ],
-    },
-
-    {
-      date: 'Tue, 30 December',
-      sessions: [
-        {
-          title: 'The perfect holiday',
-          timings: '8:30 AM - 12:00 PM IST',
-          duration: '30 min',
-          uri: '5.png',
-          finished: false,
-          registered: false,
-          capacity: 112,
-          seats: 9,
-        },
-      ],
-    },
-  ]);
+  const [data] = useState([]);
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
   const statusSection = session => {
     if (session.finished)
       return (
@@ -188,6 +132,18 @@ export default function Sessions() {
         </View>
       );
     });
+  const checkData = () => {
+    if (data.length === 0) {
+      return (
+        <View style={{marginVertical: 15}}>
+          <Text style={{color: '#999999', fontSize: 16}}>
+            No sessions scheduled {days[selectedDay.getDay()]},{' '}
+            {selectedDay.getDate()} {months[selectedDay.getMonth()]} onwards
+          </Text>
+        </View>
+      );
+    } else dataList();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.filters}>
@@ -233,7 +189,7 @@ export default function Sessions() {
       <ScrollView
         style={styles.sessions}
         contentContainerStyle={styles.sessionsContainer}>
-        {dataList()}
+        {checkData()}
       </ScrollView>
     </View>
   );

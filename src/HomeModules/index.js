@@ -3,6 +3,7 @@ import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import Tabs from '../TabNavigationModules/TabNavigation';
 import Loading from '../SessionModules/Loading';
 import Sessions from '../SessionModules/Sessions';
+import MySessions from '../SessionModules/MySessions';
 export default function Home() {
   const [SelectedTab, setSelectedTab] = useState('all');
   const [IsLoading, setIsLoading] = useState(true);
@@ -12,7 +13,10 @@ export default function Home() {
   }, []);
   const sessions = () => {
     if (IsLoading) return <Loading />;
-    else return <Sessions />;
+    else {
+      if (SelectedTab === 'all') return <Sessions />;
+      else return <MySessions />;
+    }
   };
   return (
     <View style={styles.container}>
