@@ -38,10 +38,7 @@ export default function SeatsFilter({
         />
         <View style={{flex: 1, justifyContent: 'flex-end'}}>
           <View style={styles.container}>
-            <Image
-              style={{width: 55, height: 35}}
-              source={require('../Assets/icons/bar.png')}
-            />
+            <View style={styles.bar}></View>
             <View style={styles.checkFields}>
               <TouchableOpacity
                 style={styles.check}
@@ -65,7 +62,7 @@ export default function SeatsFilter({
                   }>
                   <Image
                     style={{width: 10, height: 10, tintColor: 'white'}}
-                    source={require('../Assets/icons/tick.png')}
+                    source={require('../../Assets/icons/tick.png')}
                   />
                 </View>
               </TouchableOpacity>
@@ -91,7 +88,7 @@ export default function SeatsFilter({
                   }>
                   <Image
                     style={{width: 10, height: 10, tintColor: 'white'}}
-                    source={require('../Assets/icons/tick.png')}
+                    source={require('../../Assets/icons/tick.png')}
                   />
                 </View>
               </TouchableOpacity>
@@ -115,7 +112,7 @@ export default function SeatsFilter({
                   }>
                   <Image
                     style={{width: 10, height: 10, tintColor: 'white'}}
-                    source={require('../Assets/icons/tick.png')}
+                    source={require('../../Assets/icons/tick.png')}
                   />
                 </View>
               </TouchableOpacity>
@@ -143,6 +140,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 251,
   },
+  bar: {
+    height: 6,
+    width: 42,
+    backgroundColor: '#eaeaea',
+    borderRadius: 3,
+    marginTop: 9,
+  },
   checkFields: {
     width: '100%',
     justifyContent: 'center',
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '90%',
-    marginBottom: 20,
+    marginVertical: 9,
   },
   box: {
     width: 15,

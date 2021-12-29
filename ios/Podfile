@@ -12,6 +12,8 @@ target 'lyearn' do
     :hermes_enabled => false
   )
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'lyearnTests' do
     inherit! :complete
     # Pods for testing

@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 import SeatsFilter from '../Filters/SeatsFilter';
 import DateFilter from '../Filters/DateFilter';
+import SeatsFull from '../../Assets/icons/seats-full.svg';
+import Seats from '../../Assets/icons/seats.svg';
+import FillingFast from '../../Assets/icons/filling-fast.svg';
+import Capacity from '../../Assets/icons/capacity.svg';
 
 export default function Sessions({data}) {
   const [SeatsFilterVisible, setSeatsFilterVisible] = useState(false);
@@ -58,46 +62,35 @@ export default function Sessions({data}) {
     else {
       if (session.seats === 0)
         return (
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              style={{width: 20, height: 20, marginRight: 10}}
-              source={require('../../Assets/icons/seats-full.png')}
-            />
-            <Text style={{color: '#666666'}}>No Seats</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <SeatsFull />
+            <Text style={{color: '#666666', marginLeft: 12}}>No Seats</Text>
           </View>
         );
       else if (session.seats > 10)
         return (
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              style={{width: 20, height: 20, marginRight: 10}}
-              source={require('../../Assets/icons/capacity.png')}
-            />
-            <Text style={{color: '#666666', marginRight: 20}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Capacity />
+            <Text style={{color: '#666666', marginLeft: 12, marginRight: 20}}>
               {session.capacity}
             </Text>
-            <Image
-              style={{width: 20, height: 20, marginRight: 10}}
-              source={require('../../Assets/icons/seats.png')}
-            />
-            <Text style={{color: '#666666'}}>{session.seats} left</Text>
+            <Seats />
+            <Text style={{color: '#666666', marginLeft: 12}}>
+              {session.seats} left
+            </Text>
           </View>
         );
       else
         return (
-          <View style={{flexDirection: 'row'}}>
-            <Image
-              style={{width: 20, height: 20, marginRight: 10}}
-              source={require('../../Assets/icons/capacity.png')}
-            />
-            <Text style={{color: '#666666', marginRight: 20}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Capacity />
+            <Text style={{color: '#666666', marginLeft: 12, marginRight: 20}}>
               {session.capacity}
             </Text>
-            <Image
-              style={{width: 20, height: 20, marginRight: 10}}
-              source={require('../../Assets/icons/filling-fast.png')}
-            />
-            <Text style={{color: '#666666'}}>{session.seats} left</Text>
+            <FillingFast />
+            <Text style={{color: '#666666', marginLeft: 12}}>
+              {session.seats} left
+            </Text>
           </View>
         );
     }

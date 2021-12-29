@@ -20,7 +20,6 @@ export default function DateFilter({
   const [selectedDate, setSelectedDate] = useState(
     `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
   );
-  console.log(selectedDate);
   const [sessionDates, setSessionDates] = useState({
     '2021-12-12': {customStyles: styles.markedStyle},
     '2021-12-27': {customStyles: styles.markedStyle},
@@ -93,14 +92,14 @@ export default function DateFilter({
                   return (
                     <Image
                       style={{width: 25, height: 25}}
-                      source={require('../Assets/icons/arrow-left.png')}
+                      source={require('../../Assets/icons/arrow-left.png')}
                     />
                   );
                 if (direction === 'right')
                   return (
                     <Image
                       style={{width: 25, height: 25}}
-                      source={require('../Assets/icons/arrow-right.png')}
+                      source={require('../../Assets/icons/arrow-right.png')}
                     />
                   );
               }}

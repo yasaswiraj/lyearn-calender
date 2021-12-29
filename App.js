@@ -3,6 +3,9 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/Screens/Home';
+import Menu from './src/Assets/icons/menu.svg';
+import Search from './src/Assets/icons/search.svg';
+import Avatar from './src/Assets/icons/avatar.svg';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,25 +23,16 @@ export default function App() {
             },
             headerLeft: () => (
               <TouchableOpacity>
-                <Image
-                  style={{width: 35, height: 35}}
-                  source={require('./src/Assets/icons/menu.png')}
-                />
+                <Menu width={28} height={28} />
               </TouchableOpacity>
             ),
             headerRight: () => (
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity>
-                  <Image
-                    style={{width: 30, height: 30, marginRight: 20}}
-                    source={require('./src/Assets/icons/search.png')}
-                  />
+                <TouchableOpacity style={{marginRight: 24}}>
+                  <Search width={28} height={28} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Image
-                    style={{width: 36, height: 36}}
-                    source={require('./src/Assets/icons/avatar.png')}
-                  />
+                  <Avatar width={36} height={36} />
                 </TouchableOpacity>
               </View>
             ),
