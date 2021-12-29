@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeModules from './src/HomeModules';
+import Home from './src/Screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +12,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={HomeModules}
+          component={Home}
           options={{
             title: '',
             headerStyle: {
@@ -22,7 +22,7 @@ export default function App() {
               <TouchableOpacity>
                 <Image
                   style={{width: 35, height: 35}}
-                  source={require('./icons/menu.png')}
+                  source={require('./src/Assets/icons/menu.png')}
                 />
               </TouchableOpacity>
             ),
@@ -31,13 +31,13 @@ export default function App() {
                 <TouchableOpacity>
                   <Image
                     style={{width: 30, height: 30, marginRight: 20}}
-                    source={require('./icons/search.png')}
+                    source={require('./src/Assets/icons/search.png')}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <Image
-                    style={{width: 35, height: 35}}
-                    source={require('./icons/avatar.png')}
+                    style={{width: 36, height: 36}}
+                    source={require('./src/Assets/icons/avatar.png')}
                   />
                 </TouchableOpacity>
               </View>
