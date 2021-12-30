@@ -83,7 +83,7 @@ export default function DateFilter({
                   dayHeader: {
                     color: '#999999',
                     fontWeight: '400',
-                    marginTop: 20,
+                    marginTop: 12,
                   },
                 },
               }}
