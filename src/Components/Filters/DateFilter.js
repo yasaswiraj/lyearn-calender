@@ -45,80 +45,80 @@ export default function DateFilter({
   return (
     <View>
       <Modal
-        animationType="fade-in"
+        animationType="fade"
         transparent={true}
         visible={DateFilterVisible}
         onRequestClose={() => {
           setDateFilterVisible(!DateFilterVisible);
         }}>
         <View style={{flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)'}}></View>
-      </Modal>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={DateFilterVisible}
-        onRequestClose={() => {
-          setDateFilterVisible(!DateFilterVisible);
-        }}>
-        <StatusBar
-          backgroundColor="rgba(255, 255, 255, 0.5)"
-          barStyle="light-content"
-        />
-        <View style={{flex: 1, justifyContent: 'flex-end'}}>
-          <View style={styles.container}>
-            <Calendar
-              markingType={'custom'}
-              markedDates={markedDates}
-              current={'2021-12-26'}
-              theme={{
-                todayTextColor: 'red',
-                arrowColor: 'black',
-                'stylesheet.calendar.main': styles.customCalender,
-                'stylesheet.calendar.header': {
-                  monthText: {
-                    fontSize: 18,
-                    fontWeight: '600',
-                    color: 'black',
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={DateFilterVisible}
+          onRequestClose={() => {
+            setDateFilterVisible(!DateFilterVisible);
+          }}>
+          <StatusBar
+            backgroundColor="rgba(255, 255, 255, 0.5)"
+            barStyle="light-content"
+          />
+          <View style={{flex: 1, justifyContent: 'flex-end'}}>
+            <View style={styles.container}>
+              <Calendar
+                markingType={'custom'}
+                markedDates={markedDates}
+                current={'2021-12-26'}
+                theme={{
+                  todayTextColor: 'red',
+                  arrowColor: 'black',
+                  'stylesheet.calendar.main': styles.customCalender,
+                  'stylesheet.calendar.header': {
+                    monthText: {
+                      fontSize: 18,
+                      fontWeight: '600',
+                      color: 'black',
+                    },
+                    dayHeader: {
+                      color: '#999999',
+                      fontWeight: '400',
+                      marginTop: 5,
+                    },
                   },
-                  dayHeader: {
-                    color: '#999999',
-                    fontWeight: '400',
-                    marginTop: 12,
-                  },
-                },
-              }}
-              renderArrow={direction => {
-                if (direction === 'left')
-                  return (
-                    <Image
-                      style={{width: 25, height: 25}}
-                      source={require('../../Assets/icons/arrow-left.png')}
-                    />
-                  );
-                if (direction === 'right')
-                  return (
-                    <Image
-                      style={{width: 25, height: 25}}
-                      source={require('../../Assets/icons/arrow-right.png')}
-                    />
-                  );
-              }}
-              onDayPress={onDayPress}
-              firstDay={1}
-              disableAllTouchEventsForDisabledDays={true}
-              enableSwipeMonths={true}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setDateFilterVisible(!DateFilterVisible);
-              }}
-              style={styles.button}>
-              <Text style={{fontWeight: 'bold', color: 'white'}}>
-                Select Date
-              </Text>
-            </TouchableOpacity>
+                }}
+                renderArrow={direction => {
+                  if (direction === 'left')
+                    return (
+                      <Image
+                        style={{width: 25, height: 25}}
+                        source={require('../../Assets/icons/arrow-left.png')}
+                      />
+                    );
+                  if (direction === 'right')
+                    return (
+                      <Image
+                        style={{width: 25, height: 25}}
+                        source={require('../../Assets/icons/arrow-right.png')}
+                      />
+                    );
+                }}
+                onDayPress={onDayPress}
+                firstDay={1}
+                disableAllTouchEventsForDisabledDays={true}
+                enableSwipeMonths={true}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setDateFilterVisible(!DateFilterVisible);
+                }}
+                style={styles.button}>
+                <Text style={{fontWeight: 'bold', color: 'white'}}>
+                  Select Date
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </Modal>
       </Modal>
     </View>
   );
@@ -126,7 +126,7 @@ export default function DateFilter({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 25,
+    paddingTop: 15,
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
